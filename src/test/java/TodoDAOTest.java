@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class TodoDAOTest {
 
@@ -37,5 +38,45 @@ public class TodoDAOTest {
 
         todoDAO.insert(todoVO);
     }
+
+    //전체 글 보기 테스트
+    @Test
+    void testselectAll() throws Exception{
+
+        List<TodoVO> todoVOList = todoDAO.selectAll();
+
+        todoVOList.stream().forEach((x)->{System.out.println(x);});
+    }
+
+    //글 하나 보기 테스트
+    @Test
+    void testselectOne() throws Exception{
+        TodoVO todoVO = todoDAO.selectOne(1L);
+        System.out.println(todoVO);
+
+    }
+
+    // 글 삭제 하기 테스트
+    @Test
+    void testdeleteOne() throws Exception{
+        todoDAO.deleteOne(1L);
+    }
+
+
+    //글 수정하기 테스트
+    @Test
+    public void testUpdateOne() throws Exception {
+        TodoVO todoVO = TodoVO.builder()
+                .tno(1L)
+                .title("Sample Title...")
+                .dueDate(LocalDate.of(2021,12,31))
+                .finished(true)
+                .build();
+
+        todoDAO.updateOne(todoVO);
+
+    }
+
+
 
 }
