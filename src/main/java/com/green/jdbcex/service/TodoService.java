@@ -29,7 +29,9 @@ public enum TodoService {
     //글 등록하기
     public void register(TodoDTO todoDTO) throws  Exception{
         TodoVO todoVO= modelMapper.map(todoDTO, TodoVO.class);
-        System.out.println("todoVO: "+ todoVO);
+//        System.out.println("todoVO: "+ todoVO);
+        log.info("todoVO: "+todoVO);
+        todoDAO.insert(todoVO);
     }
 
     // 글 목록 조회
@@ -44,6 +46,33 @@ public enum TodoService {
                 .collect(Collectors.toList());
 
         return dtoList;
+
+
+
     }
+
+    //글 하나 조회
+    public TodoDTO get(Long tno) throws Exception  {
+        log.info("tno: " + tno);
+        TodoVO todoVO = todoDAO.selectOne(tno);
+        TodoDTO todoDTO = modelMapper.map(todoVO, TodoDTO.class);
+
+        return todoDTO;
+    }
+
+    //글 삭제 하기
+    public void delete(Long tno)throws Exception{
+        log.info("삭제할 글번호(service): "+tno);
+        todoDAO.deleteOne(tno);
+
+    }
+
+    //글 수정 하기
+    public void modify(TodoDTO todoDTO)throws Exception{
+        TodoVO todoVO= modelMapper.map(todoDTO, TodoVO.class);
+        log.info("글수정 todoVO: "+todoVO);
+        todoDAO.updateOne(todoVO);
+    }
+
 
 }

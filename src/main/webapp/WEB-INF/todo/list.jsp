@@ -12,17 +12,24 @@
     <title>Title</title>
 </head>
 <body>
+<h1>나의할일 list</h1><br>
+<h3>${loginInfo.mid} 님이 접속중입니다.</h3>
 
 <ul>
     <c:forEach items="${dtoList}" var="dto">
         <li>
-            <span><a href="/todo/read?tno=${dto.tno}">${dto.tno}</a></span>
+            <span><a href="/jdbcex/todo/read?tno=${dto.tno}">${dto.tno}</a></span>
             <span>${dto.title}</span>
             <span>${dto.dueDate}</span>
             <span>${dto.finished? "DONE": "NOT YET"}</span>
         </li>
     </c:forEach>
 </ul>
+
+<form action="/jdbcex/logout" method="post">
+    <button>로그아웃</button>
+</form>
+
 
 </body>
 </html>
