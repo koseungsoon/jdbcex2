@@ -13,6 +13,9 @@
 </head>
 <body>
 <h1>나의할일 list</h1><br>
+
+<h2>현재의 Application 단위 : ${appName}</h2>
+
 <h3>${loginInfo.mid} 님이 접속중입니다.</h3>
 
 <ul>
